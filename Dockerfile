@@ -2,11 +2,13 @@ FROM continuumio/miniconda3
 
 WORKDIR /app
 
-ENV MLFLOW_TRACKING_URI=http://localhost:5000
-ENV HADOOP_HOME /app/hadoop-2.9.2
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 ENV MODEL_FOLDER domain
 ENV MODEL_NAME domaine_test
+ENV MLFLOW_TRACKING_URI=http://localhost:5000
+
+ENV HADOOP_HOME /app/hadoop-2.9.2
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+
 
 ADD downloader.py downloader.py
 
