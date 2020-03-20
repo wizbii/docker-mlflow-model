@@ -20,6 +20,13 @@ RUN wget http://archive.apache.org/dist/hadoop/core/hadoop-2.9.2/hadoop-2.9.2.ta
 RUN tar -xvzf hadoop-2.9.2.tar.gz
 RUN cp hadoop-2.9.2/lib/native/libhdfs.so hadoop-2.9.2/
 
-RUN pip install mlflow pyarrow
+SHELL ["/bin/bash", "--login", "-c"]
+
+RUN conda create -n wizbii python=3.8.1
+RUN conda init bash
+RUN conda activate wizbii
+RUN conda install -c conda-forge pyarrow
+RUN conda install -c conda-forge mlflow scikit-learn=0.22.1 google-cloud-bigquery google-api-python-client oauth2client
+RUN conda install -c conda-forge bottle pytest schedule pandas pandas-gbq pymongo
 
 CMD mlflow models serve -h 0.0.0.0 --install-mlflow -m "$(python downloader.py)"/$MODEL_FOLDER
